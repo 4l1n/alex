@@ -39,7 +39,8 @@ function App() {
     const [needLastName, setNeedLastName] = useState(false);
 
     const handleSearch = (name) => {
-        const lowerCaseName = normalizeString(name);
+        const trimmedName = name.trim();
+        const lowerCaseName = normalizeString(trimmedName);
         const result = tableData.filter(table =>
             table.nombres.some(n => {
                 const lowerCaseFullName = normalizeString(n);
