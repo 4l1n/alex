@@ -16,7 +16,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://github.com/Acristea63/alex",
+  "homepage": "https://github.com/4l1n/alex.git",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
