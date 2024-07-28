@@ -2,16 +2,21 @@ import React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { styled } from '@mui/material/styles';
+
+const ListContainer = styled(List)({
+	marginTop: '1.5rem',
+});
 
 const TableList = ({ tableData }) => {
 	return (
-		<List>
+		<ListContainer>
 			{tableData.map((table, index) => (
-				<ListItem key={index}>
-					<ListItemText primary={table.masa} secondary={table.nombres.join(', ')} />
+				<ListItem key={index} style={{paddingLeft: 0}}>
+					<ListItemText primary={`Sunteți la masa ${table.masa}`} />
 				</ListItem>
 			))}
-		</List>
+		</ListContainer>
 	);
 }
 
