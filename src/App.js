@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SearchBar from './components/SearchBar';
+import TableList from './components/TableList';
+import tableData from './data/tableData';
 
 function App() {
+  const [filteredTable, setFilteredTable] = useState([]);
+
+  const handleSearch = (name) => {
+    const result = tableData.filter(table =>
+        table.nombres.some(n => n.toLowerCase().includes(name.toLowerCase()))
+    );
+    setFilteredTable(result);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        <h1>Buscador de Mesas</h1>
+        <SearchBar onSearch={handleSearch} />
+        <TableList tableData={filteredTable} />
+      </div>
   );
 }
 
