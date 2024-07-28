@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 
 const AppContainer = styled(Container)({
     marginTop: '2rem',
-    overflow: 'hidden',
+    overflow: 'hidden', // Asegura que no haya scrollbar en el contenedor principal
     width: '100%',
     height: '100%'
 });
@@ -24,17 +24,14 @@ const NoResults = styled(Typography)({
     marginTop: '2rem',
 });
 
-const Bottom = styled(Typography)({
-    textAlign: 'center',
-    width: '100%',
-    position: 'absolute',
-    bottom: 16
-});
-
 const Message = styled(Typography)({
     textAlign: 'center',
     marginTop: '2rem',
 });
+
+const normalizeString = (str) => {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+};
 
 function App() {
     const [filteredTable, setFilteredTable] = useState([]);
@@ -42,10 +39,10 @@ function App() {
     const [needLastName, setNeedLastName] = useState(false);
 
     const handleSearch = (name) => {
-        const lowerCaseName = name.toLowerCase();
+        const lowerCaseName = normalizeString(name);
         const result = tableData.filter(table =>
             table.nombres.some(n => {
-                const lowerCaseFullName = n.toLowerCase();
+                const lowerCaseFullName = normalizeString(n);
                 const [firstName, lastName] = lowerCaseFullName.split(' ');
                 return lowerCaseFullName.includes(lowerCaseName) ||
                     `${lastName} ${firstName}`.includes(lowerCaseName);
@@ -75,7 +72,6 @@ function App() {
             {noResults && <NoResults>Nu s-a găsit nici un rezultat</NoResults>}
             {needLastName && <Message>Introduceți numele de familie deoarece există mai multe persoane cu acest nume</Message>}
             {!noResults && !needLastName && <TableList tableData={filteredTable} />}
-            <Bottom>Alex&Alexia</Bottom>
         </AppContainer>
     );
 }
