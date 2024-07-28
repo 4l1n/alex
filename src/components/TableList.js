@@ -13,7 +13,7 @@ const TableList = ({ tableData }) => {
 		<ListContainer>
 			{tableData.map((table, index) => (
 				<ListItem key={index} style={{paddingLeft: 0}}>
-					<ListItemText primary={`Sunteți la masa ${table.masa}`} />
+					<ListItemText primary={`Sunteți la ${table.masa}`} />
 				</ListItem>
 			))}
 		</ListContainer>
